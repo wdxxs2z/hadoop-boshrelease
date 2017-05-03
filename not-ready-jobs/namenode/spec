@@ -7,7 +7,7 @@ packages:
   - hadoop
 
 templates:
-  bin/ctl: bin/ctl
+  bin/namenode_ctl: bin/namenode_ctl
   config/commons-logging.properties: config/commons-logging.properties
   config/core-site.xml.erb: config/core-site.xml
   config/hadoop-env.sh: config/hadoop-env.sh
@@ -19,9 +19,8 @@ templates:
   data/properties.sh.erb: data/properties.sh
 
 properties:
-#  dfs.address:
-#    description: HDFS address
-#    default: ""
+  dfs.address:
+    description: HDFS address
   dfs.port:
     description: HDFS port
     default: 8020

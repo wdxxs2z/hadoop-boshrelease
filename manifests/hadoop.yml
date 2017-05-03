@@ -1,0 +1,105 @@
+name: hadoop
+
+releases:
+ - name: hadoop
+   version: latest
+
+stemcells:
+- alias: default
+  os: ubuntu-trusty
+  version: latest
+
+update:
+  canaries: 2
+  max_in_flight: 1
+  canary_watch_time: 5000-60000
+  update_watch_time: 5000-60000
+
+instance_groups:
+# - name: ganglia
+#   azs: [z1, z2, z3]
+#   instances: 1
+#   vm_type: default
+#   jobs:
+#    - name: gangliamond
+#    - name: gangliametad
+#   - name: gangliaweb
+#   networks:
+#   - name: default
+
+- name: hdfs
+  azs: [z1, z2, z3]
+  instances: 1
+  jobs:
+  # - name: gangliamond
+  - name: namenode
+  vm_type: default
+  stemcell: default
+  persistent_disk: 10240
+  networks:
+  - name: default
+
+# - name: secondaryhdfs
+#   azs: [z1, z2, z3]
+#   instances: 1
+#   vm_type: default
+#   jobs:
+#   - name: gangliamond
+#   - name: secondarynamenode
+#   networks:
+#   - name: default
+
+# - name: yarn
+#   azs: [z1, z2, z3]
+#   instances: 1
+#   vm_type: default
+#   jobs:
+#   - name: gangliamond
+#   - name: resourcemanager
+#   - name: historyserver
+#   networks:
+#   - name: default
+
+# - name: slave
+#   azs: [z1, z2, z3]
+#   instances: 1
+#   vm_type: default
+#   jobs:
+#   - name: gangliamond
+#   - name: datanode
+#   - name: nodemanager
+#   - name: regionserver
+#   networks:
+#   - name: default
+
+# properties:
+#   ganglia:
+#     mond:
+#       address: 0.ganglia.default.<%= deployment_name %>.<%= tld %>
+#     web:
+#       servername: 0.ganglia.default.<%= deployment_name %>.<%= tld %>
+#   resourcemanager:
+#     address: 0.yarn.default.<%= deployment_name %>.<%= tld %>
+#   jobhistory:
+#     address: 0.yarn.default.<%= deployment_name %>.<%= tld %>
+#   zookeeper:
+#     servers:
+#       <% num_zookeepers.times do |i| %>
+#       <%= "- #{i}.zookeeper.default.#{deployment_name}.#{tld}\n" %>
+#       <% end %>
+#   regionserver:
+#     servers:
+#       <% num_slaves.times do |i| %>
+#       <%= "- #{i}.slave.default.#{deployment_name}.#{tld}\n" %>
+#       <% end %>
+#   dfs:
+#     address: 0.hdfs.default.<%= deployment_name %>.<%= tld %>
+#     blocksize: 134217728
+#     replication: 3
+#   mapreduce:
+#     map_java_opts: -Xmx1280m
+#     reduce_java_opts: -Xmx2304m
+#   yarn:
+#     scheduler_minimum_allocation_mb: 512
+#   nodemanager:
+#     resource_memory_mb: 12288

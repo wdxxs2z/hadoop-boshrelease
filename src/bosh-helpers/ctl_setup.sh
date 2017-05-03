@@ -46,15 +46,15 @@ do
 done
 
 # Setup Java home and add it into $PATH
-export JAVA_HOME="$HOME/packages/java7/jdk"
+export JAVA_HOME="$HOME/packages/java/jdk"
 export PATH=$JAVA_HOME/bin:$PATH
 
 # setup CLASSPATH for all jars/ folders within packages
-export CLASSPATH=${CLASSPATH:-''} # default to empty
-for package_jar_dir in $(ls -d /var/vcap/packages/*/*/*.jar)
-do
-  export CLASSPATH=${package_jar_dir}:$CLASSPATH
-done
+# export CLASSPATH=${CLASSPATH:-''} # default to empty
+# for package_jar_dir in $(ls -d /var/vcap/packages/*/*/*.jar)
+# do
+#   export CLASSPATH=${package_jar_dir}:$CLASSPATH
+# done
 
 # Load properties
 source $JOB_DIR/data/properties.sh

@@ -1,5 +1,0 @@
----
-name: java7
-dependencies: {}
-files:
-  - java7/jdk-1.7.0_51.tar.gz
