@@ -3,11 +3,11 @@ name: datanode
 
 packages:
   - bosh-helpers
-  - java7
+  - java
   - hadoop
 
 templates:
-  bin/datanode_ctl: bin/datanode_ctl
+  bin/ctl: bin/ctl
   config/commons-logging.properties: config/commons-logging.properties
   config/core-site.xml.erb: config/core-site.xml
   config/hadoop-env.sh: config/hadoop-env.sh
@@ -18,12 +18,14 @@ templates:
   config/slaves: config/slaves
   data/properties.sh.erb: data/properties.sh
 
+consumes:
+- name: namenode
+  type: namenode
+  properties:
+  - dfs:
+      port
+
 properties:
-  dfs.address:
-    description: HDFS address
-  dfs.port:
-    description: HDFS port
-    default: 8020
   dfs.blocksize:
     description: HDFS default block size
     default: 134217728

@@ -1,0 +1,5 @@
+check process datanode
+  with pidfile /var/vcap/sys/run/datanode/hadoop-hdfs-datanode.pid
+  start program "/var/vcap/packages/bosh-helpers/monit_debugger ctl '/var/vcap/jobs/datanode/bin/ctl start'"
+  stop program "/var/vcap/packages/bosh-helpers/monit_debugger ctl '/var/vcap/jobs/datanode/bin/ctl stop'"
+  group vcap

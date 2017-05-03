@@ -18,6 +18,12 @@ templates:
   config/slaves: config/slaves
   data/properties.sh.erb: data/properties.sh
 
+provides:
+- name: namenode
+  type: namenode
+  properties:
+  - dfs.port
+
 properties:
 #  dfs.address:
 #    description: HDFS address

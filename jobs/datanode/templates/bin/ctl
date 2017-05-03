@@ -7,7 +7,7 @@ source /var/vcap/packages/bosh-helpers/ctl_setup.sh 'datanode'
 export DATANODE_PID_FILE=$HDFS_PID_DIR/hadoop-hdfs-datanode.pid
 
 # Set the hostname
-hostname <%= index %>.<%= name %>.<%= spec.networks.methods(false).grep(/[^=]$/).first.to_s %>.<%= spec.deployment %>.<%= spec.dns_domain_name %>
+#hostname <%= index %>.<%= name %>.<%= spec.networks.methods(false).grep(/[^=]$/).first.to_s %>.<%= spec.deployment %>.<%= spec.dns_domain_name %>
 
 case $1 in
 
@@ -34,8 +34,10 @@ case $1 in
       chown -R $HDFS_USER:$HADOOP_GROUP /var/run/hdfs
     fi
 
-    # Start datanode
-    exec chpst -u $HDFS_USER:$HADOOP_GROUP hdfs datanode >>$LOG_DIR/$JOB_NAME.stdout.log 2>>$LOG_DIR/$JOB_NAME.stderr.log
+    pushd /var/vcap/packages/hadoop/bin
+      # Start datanode
+      exec chpst -u $HDFS_USER:$HADOOP_GROUP ./hdfs datanode >>$LOG_DIR/$JOB_NAME.stdout.log 2>>$LOG_DIR/$JOB_NAME.stderr.log
+    popd
     ;;
 
   stop)
