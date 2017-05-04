@@ -67,7 +67,7 @@ instance_groups:
   jobs:
   # - name: gangliamond
   - name: datanode
-  # - name: nodemanager
+  - name: nodemanager
   # - name: regionserver
   vm_type: default
   stemcell: default

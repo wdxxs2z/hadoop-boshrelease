@@ -7,7 +7,7 @@ source /var/vcap/packages/bosh-helpers/ctl_setup.sh 'nodemanager'
 export NODEMANAGER_PID_FILE=$YARN_PID_DIR/hadoop-yarn-nodemanager.pid
 
 # Set the hostname
-hostname <%= index %>.<%= name %>.<%= spec.networks.methods(false).grep(/[^=]$/).first.to_s %>.<%= spec.deployment %>.<%= spec.dns_domain_name %>
+# hostname <%= index %>.<%= name %>.<%= spec.networks.methods(false).grep(/[^=]$/).first.to_s %>.<%= spec.deployment %>.<%= spec.dns_domain_name %>
 
 case $1 in
 
