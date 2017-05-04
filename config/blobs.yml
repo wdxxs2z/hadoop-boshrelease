@@ -10,6 +10,9 @@ apr/apr-util-1.5.4.tar.gz:
 hadoop/hadoop-2.8.0.tar.gz:
   size: 429928937
   sha: f754062ab08b3f24ed4fb5a0ec5367352d399523
+hbase/hbase-1.2.5-bin.tar.gz:
+  size: 104584366
+  sha: c670e5eac4338d4c30ff614acf107d16f77c6948
 java/jdk-8u131-linux-x64.tar.gz:
   size: 185540433
   sha: c2a5582c049beb5c7af6b87a469bc53b759b7b87

@@ -61,7 +61,7 @@
   </property>
   <property>
     <name>hbase.rootdir</name>
-    <value>hdfs://<%= p('dfs.address') %>:<%= p('dfs.port') %>/apps/hbase/data</value>
+    <value>hdfs://<%= link('namenode').instances[0].address %>:<%= link('namenode').p('dfs.port') %>/apps/hbase/data</value>
   </property>
   <property>
     <name>hbase.rpc.engine</name>
@@ -85,11 +85,11 @@
   </property>
   <property>
     <name>hbase.zookeeper.property.clientPort</name>
-    <value>2181</value>
+    <value><%= link('peers').p('client_port') %></value>
   </property>
   <property>
     <name>hbase.zookeeper.quorum</name>
-    <value><%= p('zookeeper.servers').join(',') %></value>
+    <value><%= link("peers").instances.map do |instance| instance.address end .join(',') %></value>
   </property>
   <property>
     <name>hbase.zookeeper.useMulti</name>

@@ -1,0 +1,5 @@
+check process regionserver
+  with pidfile /var/vcap/sys/run/regionserver/hbase-regionserver.pid
+  start program "/var/vcap/packages/bosh-helpers/monit_debugger ctl '/var/vcap/jobs/regionserver/bin/ctl start'"
+  stop program "/var/vcap/packages/bosh-helpers/monit_debugger ctl '/var/vcap/jobs/regionserver/bin/ctl stop'"
+  group vcap

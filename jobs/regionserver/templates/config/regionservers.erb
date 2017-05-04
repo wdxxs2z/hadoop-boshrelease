@@ -1,0 +1,3 @@
+<% link('regionserver').instances.each do |instance| %>
+  <%= instance.address.to_str %>
+<% end %>

@@ -3,6 +3,8 @@ name: hadoop
 releases:
  - name: hadoop
    version: latest
+ - name: zookeeper
+   version: latest
 
 stemcells:
 - alias: default
@@ -16,6 +18,19 @@ update:
   update_watch_time: 5000-60000
 
 instance_groups:
+- name: zookeeper
+  azs: [z1, z2, z3]
+  instances: 1
+  jobs:
+  - name: zookeeper
+    release: zookeeper
+    properties: {}
+  vm_type: default
+  stemcell: default
+  persistent_disk: 10240
+  networks:
+  - name: default
+
 # - name: ganglia
 #   azs: [z1, z2, z3]
 #   instances: 1
@@ -33,6 +48,7 @@ instance_groups:
   jobs:
   # - name: gangliamond
   - name: namenode
+    release: hadoop
   vm_type: default
   stemcell: default
   persistent_disk: 10240
@@ -55,7 +71,9 @@ instance_groups:
   jobs:
   # - name: gangliamond
   - name: resourcemanager
+    release: hadoop
   - name: historyserver
+    release: hadoop
   vm_type: default
   stemcell: default
   networks:
@@ -67,8 +85,11 @@ instance_groups:
   jobs:
   # - name: gangliamond
   - name: datanode
+    release: hadoop
   - name: nodemanager
-  # - name: regionserver
+    release: hadoop
+  - name: regionserver
+    release: hadoop
   vm_type: default
   stemcell: default
   networks:

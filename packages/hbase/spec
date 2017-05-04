@@ -1,0 +1,4 @@
+---
+name: hbase
+files:
+  - hbase/hbase-1.2.5-bin.tar.gz
