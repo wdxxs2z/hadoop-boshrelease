@@ -3,11 +3,11 @@ name: historyserver
 
 packages:
   - bosh-helpers
-  - java7
+  - java
   - hadoop
 
 templates:
-  bin/historyserver_ctl: bin/historyserver_ctl
+  bin/ctl: bin/ctl
   config/capacity-scheduler.xml: config/capacity-scheduler.xml
   config/commons-logging.properties: config/commons-logging.properties
   config/container-executor.cfg.erb: config/container-executor.cfg
@@ -21,12 +21,26 @@ templates:
   config/yarn-site.xml.erb: config/yarn-site.xml
   data/properties.sh.erb: data/properties.sh
 
+provides:
+- name: jobhistory
+  type: jobhistory
+  properties:
+  - jobhistory.port
+  - jobhistory.webapp_port
+
+consumes:
+- name: namenode
+  type: namenode
+  properties:
+  - dfs.port
+- name: resourcemanager
+  type: resourcemanager
+  properties:
+  - resourcemanager.port
+  - resourcemanager.admin_port
+  - resourcemanager.webapp_port
+
 properties:
-  dfs.address:
-    description: HDFS address
-  dfs.port:
-    description: HDFS port
-    default: 8020
   dfs.trash_interval:
     description: HDFS Trash interval
     default: 1440
@@ -51,11 +65,6 @@ properties:
   nodemanager.vmem_pmem_ratio:
     description: Nodemanager vmem-pmem-ratio
     default: 2.1
-  resourcemanager.address:
-    description: Resourcemanager address
-  resourcemanager.port:
-    description: Resourcemanager port
-    default: 8050
   resourcemanager.admin_port:
     description: Resourcemanager admin port
     default: 8141
@@ -65,11 +74,6 @@ properties:
   resourcemanager.scheduler_port:
     description: Resourcemanager scheduler port
     default: 8030
-  resourcemanager.webapp_port:
-    description: Resourcemanager webapp port
-    default: 8088
-  jobhistory.address:
-    description: JobHistory address
   jobhistory.port:
     description: JobHistory port
     default: 10020

@@ -22,8 +22,7 @@ consumes:
 - name: namenode
   type: namenode
   properties:
-  - dfs:
-      port
+  - dfs.port
 
 properties:
   dfs.blocksize:

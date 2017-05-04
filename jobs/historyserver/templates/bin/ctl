@@ -7,7 +7,7 @@ source /var/vcap/packages/bosh-helpers/ctl_setup.sh 'historyserver'
 export HISTORYSERVER_PID_FILE=$MAPRED_PID_DIR/hadoop-mapred-historyserver.pid
 
 # Set the hostname
-hostname <%= index %>.<%= name %>.<%= spec.networks.methods(false).grep(/[^=]$/).first.to_s %>.<%= spec.deployment %>.<%= spec.dns_domain_name %>
+# hostname <%= index %>.<%= name %>.<%= spec.networks.methods(false).grep(/[^=]$/).first.to_s %>.<%= spec.deployment %>.<%= spec.dns_domain_name %>
 
 case $1 in
 
@@ -33,8 +33,10 @@ case $1 in
     chpst -u $HDFS_USER:$HADOOP_GROUP hadoop fs -chmod -R 1777 /app-logs
     chpst -u $HDFS_USER:$HADOOP_GROUP hadoop fs -chown $YARN_USER:$HADOOP_GROUP /app-logs
 
-    # Start historyserver
-    exec chpst -u $MAPRED_USER:$HADOOP_GROUP mapred historyserver >>$LOG_DIR/$JOB_NAME.stdout.log 2>>$LOG_DIR/$JOB_NAME.stderr.log
+    pushd /var/vcap/packages/hadoop/bin
+      # Start historyserver
+      exec chpst -u $MAPRED_USER:$HADOOP_GROUP ./mapred historyserver >>$LOG_DIR/$JOB_NAME.stdout.log 2>>$LOG_DIR/$JOB_NAME.stderr.log
+    popd
     ;;
 
   stop)

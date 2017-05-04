@@ -3,11 +3,11 @@ name: resourcemanager
 
 packages:
   - bosh-helpers
-  - java7
+  - java
   - hadoop
 
 templates:
-  bin/resourcemanager_ctl: bin/resourcemanager_ctl
+  bin/ctl: bin/ctl
   config/capacity-scheduler.xml: config/capacity-scheduler.xml
   config/commons-logging.properties: config/commons-logging.properties
   config/container-executor.cfg.erb: config/container-executor.cfg
@@ -21,12 +21,26 @@ templates:
   config/yarn-site.xml.erb: config/yarn-site.xml
   data/properties.sh.erb: data/properties.sh
 
+provides:
+- name: resourcemanager
+  type: resourcemanager
+  properties:
+  - resourcemanager.port
+  - resourcemanager.admin_port
+  - resourcemanager.webapp_port
+
+consumes:
+- name: namenode
+  type: namenode
+  properties:
+  - dfs.port
+- name: jobhistory
+  type: jobhistory
+  properties:
+  - jobhistory.port
+  - jobhistory.webapp_port
+
 properties:
-  dfs.address:
-    description: HDFS address
-  dfs.port:
-    description: HDFS port
-    default: 8020
   dfs.trash_interval:
     description: HDFS Trash interval
     default: 1440

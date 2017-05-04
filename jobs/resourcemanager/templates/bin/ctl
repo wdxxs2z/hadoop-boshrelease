@@ -7,7 +7,7 @@ source /var/vcap/packages/bosh-helpers/ctl_setup.sh 'resourcemanager'
 export RESOURCEMANAGER_PID_FILE=$YARN_PID_DIR/hadoop-yarn-resourcemanager.pid
 
 # Set the hostname
-hostname <%= index %>.<%= name %>.<%= spec.networks.methods(false).grep(/[^=]$/).first.to_s %>.<%= spec.deployment %>.<%= spec.dns_domain_name %>
+# hostname <%= index %>.<%= name %>.<%= spec.networks.methods(false).grep(/[^=]$/).first.to_s %>.<%= spec.deployment %>.<%= spec.dns_domain_name %>
 
 case $1 in
 

@@ -49,16 +49,17 @@ instance_groups:
 #   networks:
 #   - name: default
 
-# - name: yarn
-#   azs: [z1, z2, z3]
-#   instances: 1
-#   vm_type: default
-#   jobs:
-#   - name: gangliamond
-#   - name: resourcemanager
-#   - name: historyserver
-#   networks:
-#   - name: default
+- name: yarn
+  azs: [z1, z2, z3]
+  instances: 1
+  jobs:
+  # - name: gangliamond
+  - name: resourcemanager
+  - name: historyserver
+  vm_type: default
+  stemcell: default
+  networks:
+  - name: default
 
 - name: slave
   azs: [z1, z2, z3]

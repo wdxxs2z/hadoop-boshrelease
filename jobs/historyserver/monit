@@ -1,0 +1,5 @@
+check process historyserver
+  with pidfile /var/vcap/sys/run/historyserver/hadoop-mapred-historyserver.pid
+  start program "/var/vcap/packages/bosh-helpers/monit_debugger ctl '/var/vcap/jobs/historyserver/bin/ctl start'"
+  stop program "/var/vcap/packages/bosh-helpers/monit_debugger ctl '/var/vcap/jobs/historyserver/bin/ctl stop'"
+  group vcap
