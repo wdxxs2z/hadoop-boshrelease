@@ -8,6 +8,7 @@ packages:
 
 templates:
   bin/ctl: bin/ctl
+  bin/post-start.erb: bin/post-start
   config/commons-logging.properties: config/commons-logging.properties
   config/core-site.xml.erb: config/core-site.xml
   config/hadoop-env.sh: config/hadoop-env.sh

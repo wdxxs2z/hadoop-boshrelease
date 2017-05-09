@@ -34,6 +34,8 @@ case $1 in
       chown -R $HDFS_USER:$HADOOP_GROUP /var/run/hdfs
     fi
 
+    export HADOOP_CONF_DIR=/var/vcap/jobs/datanode/config
+
     pushd /var/vcap/packages/hadoop/bin
       # Start datanode
       exec chpst -u $HDFS_USER:$HADOOP_GROUP ./hdfs datanode >>$LOG_DIR/$JOB_NAME.stdout.log 2>>$LOG_DIR/$JOB_NAME.stderr.log

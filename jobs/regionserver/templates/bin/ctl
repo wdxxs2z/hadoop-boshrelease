@@ -1,17 +1,18 @@
 #!/bin/bash
 
 set -e # exit immediately if a simple command exits with a non-zero status
+set -x
 
 # Setup common env vars and folders
 source /var/vcap/packages/bosh-helpers/ctl_setup.sh 'regionserver'
 export REGIONSERVER_PID_FILE=$HBASE_PID_DIR/hbase-regionserver.pid
 
-# Set the hostname
-# hostname <%= index %>.<%= name %>.<%= spec.networks.methods(false).grep(/[^=]$/).first.to_s %>.<%= spec.deployment %>.<%= spec.dns_domain_name %>
-
 case $1 in
 
   start)
+    exec >>$LOG_DIR/ctl.stdout.log \
+        2>>$LOG_DIR/ctl.stderr.log
+
     pid_guard $REGIONSERVER_PID_FILE $JOB_NAME
     echo $$ > $REGIONSERVER_PID_FILE
 
@@ -21,9 +22,15 @@ case $1 in
     # Create hbase user
     id $HBASE_USER &>/dev/null || useradd -s /sbin/nologin -r -M $HBASE_USER -G $HADOOP_GROUP
 
+    # Create tmp dir
+    mkdir -p /var/vcap/sys/tmp/hbasemaster
+    chown $HBASE_USER:$HADOOP_GROUP /var/vcap/sys/tmp/hbasemaster
+
+    export HBASE_CONF_DIR=/var/vcap/jobs/regionserver/config
+
     pushd /var/vcap/packages/hbase/bin
       # Start HBase RegionServer
-      exec chpst -u $HBASE_USER:$HADOOP_GROUP ./hbase regionserver start >>$LOG_DIR/$JOB_NAME.stdout.log 2>>$LOG_DIR/$JOB_NAME.stderr.log
+      exec chpst -u $HBASE_USER:$HADOOP_GROUP ./hbase <%= p('hbase.master') ? "master" : "regionserver" %> start >>$LOG_DIR/$JOB_NAME.stdout.log 2>>$LOG_DIR/$JOB_NAME.stderr.log
     popd
     ;;
 

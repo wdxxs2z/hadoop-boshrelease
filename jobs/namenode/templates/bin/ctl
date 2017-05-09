@@ -29,6 +29,8 @@ case $1 in
       sudo -E -u $HDFS_USER hdfs namenode -format >>$LOG_DIR/$JOB_NAME.stdout.log 2>>$LOG_DIR/$JOB_NAME.stderr.log
     fi
 
+    export HADOOP_CONF_DIR=/var/vcap/jobs/namenode/config
+
     pushd /var/vcap/packages/hadoop/bin
       # Start namenode
       exec chpst -u $HDFS_USER:$HADOOP_GROUP ./hdfs namenode >>$LOG_DIR/$JOB_NAME.stdout.log 2>>$LOG_DIR/$JOB_NAME.stderr.log

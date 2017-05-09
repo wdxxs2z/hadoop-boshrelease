@@ -19,6 +19,8 @@ templates:
 provides:
 - name: regionserver
   type: regionserver
+- name: hmaster
+  type: hmaster
 
 consumes:
 - name: namenode
@@ -41,3 +43,6 @@ properties:
   ganglia.mond.port:
     description: Ganglia mond port
     default: 8649
+  hbase.master:
+    description: Start HBase in master mode. Defaults to regionserver
+    default: false

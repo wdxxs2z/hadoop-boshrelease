@@ -1,5 +1,17 @@
 <configuration>
   <property>
+    <name>hbase.client.default.rpc.codec</name>
+    <value></value>
+  </property>
+  <property>
+    <name>hbase.regionserver.hostname</name>
+    <value><%= spec.address %></value>
+  </property>
+  <property>
+    <name>hbase.master.hostname</name>
+    <value><%= spec.address %></value>
+  </property>
+  <property>
     <name>dfs.support.append</name>
     <value>true</value>
   </property>
@@ -77,7 +89,7 @@
   </property>
   <property>
     <name>hbase.superuser</name>
-    <value>hbase</value>
+    <value>vcap</value>
   </property>
   <property>
     <name>hbase.tmp.dir</name>

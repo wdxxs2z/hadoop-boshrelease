@@ -74,6 +74,15 @@ instance_groups:
     release: hadoop
   - name: historyserver
     release: hadoop
+  - name: regionserver
+    release: hadoop
+    provides:
+      regionserver: {as: hmaster_regionserver}
+    consumes:
+      regionserver: {from: hbase_data}
+    properties:
+      hbase:
+        master: true
   vm_type: default
   stemcell: default
   networks:
@@ -90,6 +99,11 @@ instance_groups:
     release: hadoop
   - name: regionserver
     release: hadoop
+    provides:
+      hmaster: nil
+      regionserver: {as: hbase_data}
+    consumes:
+      regionserver: {from: hbase_data}
   vm_type: default
   stemcell: default
   networks:

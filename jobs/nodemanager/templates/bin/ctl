@@ -34,6 +34,8 @@ case $1 in
       chmod -R 755 $YARN_LOCAL_LOG_DIR;
     fi
 
+    export YARN_CONF_DIR=/var/vcap/jobs/yarn/config
+
     # Start nodemanager
     exec chpst -u $YARN_USER:$HADOOP_GROUP yarn nodemanager >>$LOG_DIR/$JOB_NAME.stdout.log 2>>$LOG_DIR/$JOB_NAME.stderr.log
     ;;
