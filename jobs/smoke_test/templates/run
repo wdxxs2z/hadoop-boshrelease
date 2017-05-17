@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -e
+
+export JAVA_HOME=/var/vcap/packages/java/jdk
+export JOB_DIR=/var/vcap/jobs/smoke_test
+export PACKAGE_DIR=/var/vcap/packages/smoke_tests
+
+lib_dir=$PACKAGE_DIR/lib/
+
+classes=$JOB_DIR/config
+pushd $lib_dir
+  for c in `ls *.jar`;
+  do
+    classes=$classes:$lib_dir/$c
+  done
+popd
+
+$JAVA_HOME/bin/java -classpath "$classes" CreateTable

@@ -1,0 +1,20 @@
+---
+name: load_test
+
+templates:
+  run: bin/run
+  config/hbase-site.xml.erb: config/hbase-site.xml
+  config/log4j.properties: config/log4j.properties
+
+packages:
+- java
+- smoke_tests
+
+consumes:
+- name: peers
+  type: zookeeper_peers
+  properties:
+  - client_port
+
+
+properties: {}

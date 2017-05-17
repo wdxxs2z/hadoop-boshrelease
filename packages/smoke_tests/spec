@@ -1,0 +1,8 @@
+---
+name: smoke_tests
+
+dependencies: []
+
+files:
+- examples/HbaseExample-1.0-SNAPSHOT.tar.gz
+- examples/HbaseLoadTest-1.0-SNAPSHOT.tar.gz

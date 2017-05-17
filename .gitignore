@@ -8,3 +8,15 @@ blobs
 .idea
 .final_builds/jobs/**/*.tgz
 .final_builds/packages/**/*.tgz
+
+examples/HbaseExample/build/
+examples/HbaseExample/.gradle/
+examples/HbaseExample/gradle/
+examples/HbaseExample/gradlew
+examples/HbaseExample/gradlew.bat
+
+examples/HbaseLoadTest/build/
+examples/HbaseLoadTest/.gradle/
+examples/HbaseLoadTest/gradle/
+examples/HbaseLoadTest/gradlew
+examples/HbaseLoadTest/gradlew.bat

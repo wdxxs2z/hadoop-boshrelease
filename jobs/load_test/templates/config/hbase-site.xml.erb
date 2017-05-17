@@ -1,0 +1,14 @@
+<configuration>
+    <property>
+      <name>hbase.zookeeper.property.clientPort</name>
+      <value><%= link('peers').p('client_port') %></value>
+    </property>
+    <property>
+      <name>hbase.zookeeper.quorum</name>
+      <value><%= link("peers").instances.map do |instance| instance.address end .join(',') %></value>
+    </property>
+    <property>
+        <name>zookeeper.znode.parent</name>
+        <value>/hbase-unsecure</value>
+    </property>
+</configuration>
